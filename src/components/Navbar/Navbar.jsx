@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './navbar.css';
 
@@ -12,10 +12,25 @@ function Navbar({handlecategory,handlefilter,cart}) {
     const closeMenu = () => {
         setMenuActive(false);
     };
+    const [scrolled, setScrolled] = useState(false);
 
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+  
+    useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
     return (
         <>
-            <header className="head">
+            <header className={`head ${scrolled ? 'scrolled' : ''}`}>
                 <nav className="nav">
                     <Link to='/' onClick={handlefilter}>
                         <div className='nav-logo'>

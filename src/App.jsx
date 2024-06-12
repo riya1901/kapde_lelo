@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import Hero from './components/hero/Hero.jsx'
 import Category from './components/category/Category.jsx'
+import ProductPage from './components/productpage/productPage.jsx';
 
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
@@ -42,9 +43,11 @@ function App() {
       createRoutesFromElements(
         <Route path='/' element={<Layout handlefilter={handleclearcategory} handlecategory={handlecategory} cart={Object.keys(cart).length} />}>
       <Route path='' element={<Hero Productdata={filtereddata} cart={cart} updatecart={updatecart}/>}/>
-      <Route path='Mens/' element={<Category title="Mens Wear" Productdata={filtereddata}/>}/>
-      <Route path='womens/' element={<Category title="womens Wear" Productdata={filtereddata}/>}/>
-      <Route path='kids/' element={<Category title="kids Wear" Productdata={filtereddata}/>}/>
+      <Route path='Mens/' element={<Category title="Mens Wear" Productdata={filtereddata} cart={cart}updatecart={updatecart}/>}/>
+      <Route path='womens/' element={<Category title="womens Wear" Productdata={filtereddata} cart={cart}updatecart={updatecart}/>}/>
+      <Route path='kids/' element={<Category title="kids Wear" Productdata={filtereddata} cart={cart} updatecart={updatecart}/>}/>
+      <Route path='productpage/' element={<ProductPage id={1} cart={cart} updatecart={updatecart}/>}/>
+
       </Route>
     )
     );

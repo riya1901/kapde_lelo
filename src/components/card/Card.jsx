@@ -8,8 +8,8 @@ function Card({ id,img, name, price,updatecart,cart}) {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
   
-  updatecart(useSelector((state) => state)) ;
   const Cart=useSelector((state) => state)
+  updatecart(Cart) ;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +35,6 @@ function Card({ id,img, name, price,updatecart,cart}) {
   function handleaddtocart() {
     dispatch(addtocart({id}));
   }
-  const { state } ={id:{id}} ;
 
 
   return (
