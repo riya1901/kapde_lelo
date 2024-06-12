@@ -1,0 +1,61 @@
+/* CustomCarousel.css */
+.carousel {
+  position: relative;
+  width: 100vw;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.carousel-control.prev {
+  left: 0;
+}
+
+.carousel-control.next {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    height: 50vh; /* Adjust height for smaller screens */
+  }
+
+  .carousel-control {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel {
+    height: 30vh; /* Adjust height for even smaller screens */
+  }
+
+  .carousel-control {
+    padding: 5px;
+  }
+}
