@@ -3,11 +3,11 @@ import Carousel from '../carosel/Carousel'
 import Category from '../category/Category.jsx'
 
 
-function Hero({Productdata}) {
+function Hero({Productdata,updatecart,cart}) {
   return (
     <>
     <Carousel/>
-    <Category title="Trendings" Productdata={Productdata}/>
+    <Category title="Trendings" Productdata={Productdata} updatecart={updatecart} cart={cart}/>
     </>
   )
 }

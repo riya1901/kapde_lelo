@@ -16,7 +16,8 @@ import Category from './components/category/Category.jsx'
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
   const [filtereddata, updatefiltereddata] = useState(Productdata);
-  
+  const [cart, updatecart] = useState([]);
+
   function handleclearcategory() {
     setcategoryvalue("");  }
 
@@ -39,8 +40,8 @@ function App() {
 
     const router = createBrowserRouter(
       createRoutesFromElements(
-        <Route path='/' element={<Layout handlefilter={handleclearcategory} handlecategory={handlecategory} />}>
-      <Route path='' element={<Hero Productdata={filtereddata}/>}/>
+        <Route path='/' element={<Layout handlefilter={handleclearcategory} handlecategory={handlecategory} cart={Object.keys(cart).length} />}>
+      <Route path='' element={<Hero Productdata={filtereddata} cart={cart} updatecart={updatecart}/>}/>
       <Route path='Mens/' element={<Category title="Mens Wear" Productdata={filtereddata}/>}/>
       <Route path='womens/' element={<Category title="womens Wear" Productdata={filtereddata}/>}/>
       <Route path='kids/' element={<Category title="kids Wear" Productdata={filtereddata}/>}/>

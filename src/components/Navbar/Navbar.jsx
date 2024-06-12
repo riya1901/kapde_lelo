@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './navbar.css';
 
-function Navbar({handlecategory,handlefilter}) {
-    const [cart, setCart] = useState(0);
+function Navbar({handlecategory,handlefilter,cart}) {
     const [menuActive, setMenuActive] = useState(false);
 
     const toggleMenu = () => {
