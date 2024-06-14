@@ -3,13 +3,14 @@ import './card.css';
 import Counter from '../cartcounter/Counter';
 import { useDispatch, useSelector } from "react-redux";
 import { addtocart } from "../../Store/action.js";
+import { useNavigate } from 'react-router-dom';
 
-function Card({ id,img, name, price,updatecart,cart}) {
+function Card({ id,img, name, price}) {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
   
   const Cart=useSelector((state) => state)
-  updatecart(Cart) ;
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,28 +32,36 @@ function Card({ id,img, name, price,updatecart,cart}) {
     };
   }, []);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleaddtocart() {
     dispatch(addtocart({id}));
+  }
+  function handCick() {
+    navigate(`/productpage/${id}`);
+  window.scrollTo(0, 0);
+
   }
 
 
   return (
     <div>
-      <div className={`card ${isVisible ? "active" :""}`} ref={elementRef}>
-        <div className="card-img">
+     
+      
+      <div className={`card ${isVisible ? "active" :""}`} ref={elementRef} >
+        <div className="card-img"onClick={handCick}>
           <img src={img} alt="" /></div>
         <div className="desc">
-          <div className="card-title">{name}</div>
+          <div className="card-title" onClick={handCick}>{name}</div>
           <hr className="card-divider"></hr>
           <div className="card-footer">
             <div className="card-price"><span>$</span> {price}</div>
 
-            {Object.keys(cart).length > 0 &&
+            {Object.keys(Cart).length > 0 &&
               Cart.find(
                 (item) => item.product.id ==id
               ) ? (
-                <Counter id={id} cart={cart}/>
+                <Counter id={id}/>
               ) : (
                 
             <button className="card-btn" onClick={() => handleaddtocart()}>

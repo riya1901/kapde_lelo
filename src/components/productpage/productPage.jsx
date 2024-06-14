@@ -1,62 +1,71 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import './productPage.css'
-import Productdata from "./productdata.json";
-import { addtocart } from "../../Store/action.js";
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './productPage.css';
+import Productdata from '../../assets/productdata.json';
+import { addtocart } from '../../Store/action.js';
 import Category from '../category/Category.jsx';
+import Counter from '../cartcounter/Counter.jsx';
+import { useParams } from 'react-router-dom';
 
-function ProductPage({id, updatecart, cart}) {
-  //const index=Productdata.findIndex(item => item.product.id == id);
-  //const product=Productdata[index];
-  //updatecart(useSelector((state) => state)) ;
+function ProductPage() {
+  const { id } = useParams();
+  const product = useMemo(() => Productdata.find(item => item.key == id), [id]);
+  const Cart = useSelector(state => state);
   const dispatch = useDispatch();
 
   function handleaddtocart() {
-    dispatch(addtocart({ id }));
+    dispatch(addtocart({id}));
   }
+
+  const isInCart = useMemo(
+    () => Cart.find(item => item.product.id == id),
+    [Cart, id]
+  );
+
   return (
     <div className="ProductPage">
       <div className='product-main'>
         <div className='product'>
-          <img src="src/assets/shop.png" alt="can not load" />
+          <img src={product.image} alt="Cannot load" />
           <div className='details'>
-            <p className='title'>Titel of the item </p>
+            <p className='title'>{product.title}</p>
             <p className='special'>offer price</p>
-            <p className='price'>MRP: <span className='offer'>$20</span> <span>$32</span> <span className='offer'>20% off</span> </p>
+            <p className='price'>
+              MRP: <span className='offer'>${product.price}</span> 
+              <span>{(product.price * 1.20).toFixed(2)}</span> 
+              <span className='offer'>20% off</span>
+            </p>
             <p className="review">
-              3.5<span> &#9733;</span>&nbsp;&nbsp;3244 reviews
+              {product.rating.rate}
+              <span> &#9733;</span>&nbsp;&nbsp;
+              {product.rating.count} reviews
             </p>
-            <p className='desc'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas obcaecati omnis tempora ab harum blanditiis ratione facere tenetur, aliquid, soluta quasi magnam consequatur quas beatae nisi non excepturi nobis dolorem.
-            </p>
+            <p className='desc'>{product.description}</p>
             <div className='buybtn'>
+              {Object.keys(Cart).length > 0 && isInCart ? (
+                <Counter id={id} />
+              ) : (
+                <button className="pushable" onClick={handleaddtocart}>
+                  <span className="shadow"></span>
+                  <span className="edge"></span>
+                  <span className="front">Add to cart</span>
+                </button>
+              )}
               <button className="pushable">
                 <span className="shadow"></span>
                 <span className="edge"></span>
-                <span className="front">
-                  Add to cart
-                </span>
-              </button>
-              <button className="pushable">
-                <span className="shadow"></span>
-                <span className="edge"></span>
-                <span className="front">
-                  Buy Now
-                </span>
+                <span className="front">Buy Now</span>
               </button>
             </div>
           </div>
         </div>
-                  <hr className="divider"></hr>
-
+        <hr className="divider" />
         <div className='suggestion'>
-          
-        <Category title="Things you might like" Productdata={Productdata} cart={cart} updatecart={updatecart}/>
+          <Category title="Things you might like" Productdata={Productdata} />
         </div>
       </div>
-
     </div>
-
-  )
+  );
 }
 
-export default ProductPage
+export default ProductPage;

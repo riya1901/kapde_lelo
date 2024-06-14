@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../card/Card'
 import './category.css';
 
-function Category({title,Productdata,updatecart,cart}) {
+function Category({title,Productdata,updatecart}) {
   return (
     <div>
             <div className='title'><p>{title}</p></div>
@@ -11,8 +11,7 @@ function Category({title,Productdata,updatecart,cart}) {
   
           {Productdata.map((product) => (
             <Card
-            key={product.key} id={product.key} 
-            img={product.image} name={product.title}  price={product.price} updatecart={updatecart} cart={cart}/>
+            key={product.key} id={product.key} img={product.image} name={product.title}  price={product.price} />
           ))}
 
     

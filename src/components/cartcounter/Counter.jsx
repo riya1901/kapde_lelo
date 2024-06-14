@@ -1,9 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addtocart, removefromcart } from "../../Store/action";
 import './counter.css'
 
-const Counter = ({id, cart }) => {
+const Counter = ({id}) => {
+  const cart=useSelector((state) => state);
+
+ 
+ 
   const dispatch = useDispatch();
   return (
     <div className="cartcount">
@@ -14,7 +18,7 @@ const Counter = ({id, cart }) => {
         -
       </button>
       {cart.map((item) => {
-        if (item.product.id === id)
+        if (item.product.id == id)
           return <span className="count" key={item.product.id}>{item.quantity}</span>;
       })}
       <button

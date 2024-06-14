@@ -9,10 +9,10 @@ const reducer = (state = initialState, action) => {
     case 'addtocart':
       id=action.payload.id;
        existingProduct = newState.find((item) => {
-        if (item.product.id === action.payload.id) {
+        if (item.product.id == action.payload.id) {
           item.quantity ++;
         }
-        return (item.product.id === action.payload.id)
+        return (item.product.id == action.payload.id)
       });
       console.log(id);
 
@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
       return [...newState, newItem];
     case 'updateCart':
       newState.forEach((item) => {
-        if (item.product.id === action.payload.productId) {
+        if (item.product.id == action.payload.productId) {
           if (action.payload.type === 'increase') {
             item.quantity += 1;
           } else {
@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
       return ([...newState]);
     case 'removefromcart':
       console.log(index,'remove')
-       index = newState.findIndex(item => item.product.id === action.payload);
+       index = newState.findIndex(item => item.product.id == action.payload);
        if(newState[index].quantity==1){
          newState.splice(index, 1);
        }

@@ -4,11 +4,11 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 
 
-function Layout({handlecategory,handlefilter,cart}) {
+function Layout({handlecategory,handlefilter,handleSearch}) {
   
   return (
    <>
-   <Navbar handlecategory={handlecategory} handlefilter={handlefilter} cart={cart} />
+   <Navbar handlecategory={handlecategory} handlefilter={handlefilter}  handleSearch={handleSearch} />
    <Outlet/>
    <Footer/>
    </>

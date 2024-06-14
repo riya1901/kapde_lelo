@@ -40,6 +40,7 @@
     width: 100px;
     height: 100px;
     object-fit: scale-down;
+    cursor:pointer;
 
   }
 
@@ -63,7 +64,7 @@
   text-align: center;
   color: var(--font-color);
   overflow: hidden;
-
+cursor:pointer;
 }
 
 .card-subtitle {
