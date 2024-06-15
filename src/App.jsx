@@ -14,6 +14,7 @@ import Hero from './components/hero/Hero.jsx'
 import Category from './components/category/Category.jsx'
 import ProductPage from './components/productpage/productPage.jsx';
 import Cart from './components/cart/cart.jsx';
+import Checkout from './components/checkout/checkout.jsx';
 
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
@@ -58,6 +59,11 @@ function App() {
         <Route path='kids/' element={<Category title="kids Wear" Productdata={filtereddata}/>} />
         <Route path='productpage/:id' element={<ProductPage />} />
         <Route path='cart/' element={<Cart />} />
+        <Route path='checkout/' element={<Checkout />}>
+        <Route path=':id' element={<Checkout />} />
+
+        </Route>
+
 
 
       </Route>

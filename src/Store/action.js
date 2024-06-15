@@ -24,5 +24,12 @@ const removefromcart = (itemId) => {
     });
   };
 };
+const clearCart=()=>{
+  return(dispatch)=>{
+    dispatch({
+      type: 'clearcart'
+    });
+  }
+}
 
-export { addtocart, updateCart, removefromcart };
+export { addtocart, updateCart, removefromcart,clearCart };

@@ -3,6 +3,7 @@ import './cart.css';
 import { useSelector } from 'react-redux';
 import Card from '../card/Card';
 import Productdata from "../../assets/productdata.json";
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
     const [cartItems, setCartItems] = useState([]);
@@ -28,7 +29,12 @@ function Cart() {
         updateCartItems();
     }, [Cart]);
 
-    console.log(cartItems);
+    console.log(cartItems);//for debug
+    const navigate=useNavigate();
+
+    function hanndleCheckout(){
+        navigate(`/checkout`);
+    }
 
     return (
         <div className='cartPage'>
@@ -62,8 +68,8 @@ function Cart() {
                     </div>
                 </div>
             </div>
-            <div className="checkoutbtn">
-                <div className="btn-conteiner">
+            {(cartItems!="")?<div className="checkoutbtn">
+                <div className="btn-conteiner" onClick={hanndleCheckout}>
                     <a className="btn-content" href="#">
                         <span className="btn-title">CHECKOUT</span>
                         <span className="icon-arrow">
@@ -77,7 +83,8 @@ function Cart() {
                         </span>
                     </a>
                 </div>
-            </div>
+            </div>:<></>}
+            
         </div>
     );
 }

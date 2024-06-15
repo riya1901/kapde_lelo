@@ -5,13 +5,17 @@ import Productdata from '../../assets/productdata.json';
 import { addtocart } from '../../Store/action.js';
 import Category from '../category/Category.jsx';
 import Counter from '../cartcounter/Counter.jsx';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 function ProductPage() {
   const { id } = useParams();
   const product = useMemo(() => Productdata.find(item => item.key == id), [id]);
   const Cart = useSelector(state => state);
   const dispatch = useDispatch();
+  const navigate=useNavigate();
+  function handlebuynow(){
+    navigate(`/checkout/${id}`)
+  }
 
   function handleaddtocart() {
     dispatch(addtocart({id}));
@@ -51,7 +55,7 @@ function ProductPage() {
                   <span className="front">Add to cart</span>
                 </button>
               )}
-              <button className="pushable">
+              <button className="pushable" onClick={handlebuynow}>
                 <span className="shadow"></span>
                 <span className="edge"></span>
                 <span className="front">Buy Now</span>

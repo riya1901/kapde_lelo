@@ -18,8 +18,8 @@ const Carousel = () => {
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
         setFade(true);
-      }, 500);
-    }, 3000); // Change slide every 3 seconds
+      }, 700);
+    }, 5000); // Change slide every 3 seconds
 
     return () => clearInterval(interval);
   }, []);

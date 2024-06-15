@@ -51,17 +51,17 @@ function Navbar({handlecategory,handlefilter,handleSearch}) {
                     <Link to='/' onClick={handlefilter}>
                         <div className='nav-logo'>
                             <img className='logo' src="\src\assets\shop.png" alt="Logo" />
-                            <p className='logo-name'>Kapde Lelo</p>
+                            <p className='logo-name'>Kapde Wale</p>
                         </div>
                     </Link>
-                    <ul className={`nav-menu ${menuActive ? 'active' : ''}`}>
-                        <li className="nav-item">
+                    <ul className={`nav-menu ${menuActive ? 'active' : ''}`} >
+                        <li className="nav-item"onClick={toggleMenu}>
                             <NavLink to='/Mens' value="mens wear" className={({isActive})=>`navbar-link${isActive?"-active":""}`} onClick={handlecategory}>Men's clothing</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item" onClick={toggleMenu}>
                             <NavLink to='/womens' className={({isActive})=>`navbar-link${isActive?"-active":""}`} onClick={handlecategory}>Women's clothing</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item"onClick={toggleMenu}>
                             <NavLink to='/kids' className={({isActive})=>`navbar-link${isActive?"-active":""}`} onClick={handlecategory}>Kids wear</NavLink>
                         </li>
                     </ul>

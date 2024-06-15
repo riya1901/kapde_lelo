@@ -46,6 +46,8 @@ const reducer = (state = initialState, action) => {
         newState[index].quantity--;
        }
       return newState;
+      case 'clearcart':
+       return [];
     default:
       return state;
   }
