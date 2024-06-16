@@ -1,0 +1,31 @@
+.profilepage{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    .title{
+        font-size: 3rem;
+    }
+}
+.profile-main {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    width: 60vw;
+    padding: 2rem;
+    background-color: rgba(250, 248, 245, 0.985);
+    .divider {
+        width: 50vw;
+        border: 1px solid var(--subtext);
+        border-radius: 50px;
+        margin:0rem ;
+        margin-top: -1rem;
+        padding: 0px;
+        
+      }
+}

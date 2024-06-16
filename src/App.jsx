@@ -15,6 +15,7 @@ import Category from './components/category/Category.jsx'
 import ProductPage from './components/productpage/productPage.jsx';
 import Cart from './components/cart/cart.jsx';
 import Checkout from './components/checkout/checkout.jsx';
+import Profile from './components/user/Profile.jsx';
 
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
@@ -76,8 +77,9 @@ function App() {
         <Route path='cart/' element={<Cart />} />
         <Route path='checkout/' element={<Checkout />}>
         <Route path=':id' element={<Checkout />} />
-
         </Route>
+        <Route path='user/' element={<Profile userValues={userValues} setUserValues={setUserValues} />} />
+
 
 
 
