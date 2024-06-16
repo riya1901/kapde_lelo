@@ -178,6 +178,8 @@ a {
     fill: var(--primarytext);
     width: 1rem;
     height: 1rem;
+    margin-bottom: 1rem;
+    scale: 1.2;
 }
 
 /* Responsive Adjustments */

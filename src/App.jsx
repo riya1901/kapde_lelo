@@ -20,6 +20,21 @@ function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
   const [filtereddata, updatefiltereddata] = useState(Productdata);
   const [search, setSearch] = useState("");
+  const [userValues, setUserValues] = useState({
+    email: '',
+    getUpdates: false,
+    country: 'India',
+    firstName: '',
+    lastName: '',
+    address: '',
+    address2: '',
+    city: '',
+    state: '',
+    pinCode: '',
+    phone: '',
+    shippingMethod: '',
+    paymentMethod: 'creditCard',
+  });
 
   function handlefilter() {
     setcategoryvalue("");
@@ -52,7 +67,7 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory}  handleSearch={handleSearch} />}>
+      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory}  handleSearch={handleSearch} userValues={userValues} setUserValues={setUserValues}/>}>
         <Route path='' element={<Hero Productdata={filtereddata}  />} />
         <Route path='Mens/' element={<Category title="Mens Wear" Productdata={filtereddata} />} />
         <Route path='womens/' element={<Category title="womens Wear" Productdata={filtereddata}  />} />
