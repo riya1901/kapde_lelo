@@ -1,57 +1,155 @@
+import { combineReducers } from 'redux';
+import axios from 'axios';
+const initialUserState = [{
+  _id:"",
+  email: '',
+  getUpdates: false,
+  country: 'India',
+  firstName: '',
+  lastName: '',
+  address: '',
+  address2: '',
+  city: '',
+  state: '',
+  pinCode: '',
+  phone: '',
+  shippingMethod: '',
+  paymentMethod: 'creditCard',
+}];
 const initialState = [];
+let data = [];
+let temp=[];
 
-const reducer = (state = initialState, action) => {
+
+
+const fetchCart = async (id) => {
+  console.log("fetch called",id);
+  
+    try {
+      const response =
+      await axios.get(`http://localhost:5555/cart/${id}`);
+      data = response.data;
+      console.log("cart reducer",data)
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  
+};
+
+const add = async (data) => {
+  
+  try {
+     await axios.post(`http://localhost:5555/cartnew`,data).then(
+     (response)=>{
+       temp=response.data;
+     }  
+    );
+     
+
+  } catch (err) {
+    console.log(err.message);
+  }
+
+};
+const update = async (id,data) => {
+  try {
+    
+      await axios.put(`http://localhost:5555/cartup/${id}`,data);
+
+  } catch (err) {
+    console.log(err.message);
+  }
+
+};
+const remove = async (id) => {
+  console.log("removeIP",id)
+  try {
+    
+      await axios.delete(`http://localhost:5555/cartdel/${id}`);
+
+  } catch (err) {
+    console.log(err.message);
+  }
+
+};
+
+
+const cartReducer = (state = initialState, action) => {
   const newState = [...state];
-  let existingProduct,newItem,index,id;
+  let existingProduct, index, id;
 
   switch (action.type) {
-
     case 'addtocart':
-      id=action.payload.id;
-       existingProduct = newState.find((item) => {
-        if (item.product.id == action.payload.id) {
-          item.quantity ++;
-        }
-        return (item.product.id == action.payload.id)
-      });
-      console.log(id);
+      console.log("current cart", state);
+      id = action.payload.id;
+      existingProduct = newState.find((item) => item.id === id);
 
-      if(existingProduct) return ([...newState]);
+      if (existingProduct) {
+        existingProduct.quantity++;
+        if(action.payload.user!=0)  
+        update(existingProduct._id, existingProduct);
+        return [...newState];
+      }
 
-       newItem = {quantity: 1, product:{
-        id:id}
-       };
-      console.log([...newState, newItem],'addtoCart')
-      return [...newState, newItem];
-    case 'updateCart':
-      newState.forEach((item) => {
-        if (item.product.id == action.payload.productId) {
-          if (action.payload.type === 'increase') {
-            item.quantity += 1;
-          } else {
-            if (item.quantity > 1) {
-              item.quantity -= 1;
-            }
-          }
-        }
-      });
-      return ([...newState]);
+      return [...newState];
+      
+      case 'addItemnew':
+        if(initialUserState._id!="")  
+        return[...newState,action.payload]
+      else
+      return[...newState,action.payload]
+
+
     case 'removefromcart':
-      console.log(index,'remove')
-       index = newState.findIndex(item => item.product.id == action.payload);
-       if(newState[index].quantity==1){
-         newState.splice(index, 1);
-       }
-       else{
+      console.log(initialUserState._id,"id")
+
+      index = newState.findIndex(item => item.id === action.payload.id);
+      if (newState[index].quantity === 1) {
+        if(action.payload.user!=0)  
+        remove(newState[index]._id);
+        newState.splice(index, 1);
+      } else {
         newState[index].quantity--;
-       }
+        if(action.payload.user!=0)  
+        update(newState[index]._id, newState[index]);
+      }
       return newState;
-      case 'clearcart':
-       return [];
+    case 'clearcart':
+      if(initialUserState._id!=""){
+
+        newState.foreach((item)=>{
+          remove(item._id);
+        })
+      }
+      return [];
+    case 'setCart':
+      fetchCart(action.payload);
+      return [...data];
     default:
       return state;
   }
-  
+
 };
+
+
+const userReducer = (state = initialUserState, action) => {
+  switch (action.type) {
+    case 'setUser':
+      console.log("setUser",...action.payload)
+      return {
+        
+        ...action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
+const reducer = combineReducers({
+  user: userReducer,
+  cart: cartReducer,
+});
 
 export default reducer;

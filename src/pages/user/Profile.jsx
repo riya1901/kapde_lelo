@@ -1,4 +1,5 @@
 import React from 'react'
+import './profile.css'
 
 function Profile(userValues,setUserValues) {
 
@@ -7,7 +8,7 @@ function Profile(userValues,setUserValues) {
         <div className="profile-main">
 <div>
 
-        sfd
+        
 </div>
         </div>
     </div>

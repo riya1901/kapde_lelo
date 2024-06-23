@@ -15,3 +15,8 @@
     gap: 5rem;
     justify-content: center;
 }
+.lmain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

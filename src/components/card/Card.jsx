@@ -1,15 +1,18 @@
 import React,{useEffect,useState,useRef}from 'react'
 import './card.css';
-import Counter from '../cartcounter/Counter';
+import Counter from '../cartcounter/Counter.jsx';
 import { useDispatch, useSelector } from "react-redux";
-import { addtocart } from "../../Store/action.js";
+import { addItem, addtocart, setCart } from "../../Store/action.js";
 import { useNavigate } from 'react-router-dom';
 
 function Card({ id,img, name, price}) {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
   
-  const Cart=useSelector((state) => state)
+  const Cart=useSelector((state) => state.cart)
+  const temp= useSelector((state) => state.user[0]._id)
+const user=temp==""?0:temp;
+console.log("card user",user)
 
 
   useEffect(() => {
@@ -35,14 +38,17 @@ function Card({ id,img, name, price}) {
   const navigate = useNavigate();
 
   function handleaddtocart() {
-    dispatch(addtocart({id}));
+console.log("card id",id)
+
+    dispatch(addItem(id,user));
+
   }
   function handCick() {
     navigate(`/productpage/${id}`);
   window.scrollTo(0, 0);
 
   }
-
+console.log("cart",Cart)
 
   return (
     <div>
@@ -59,7 +65,7 @@ function Card({ id,img, name, price}) {
 
             {Object.keys(Cart).length > 0 &&
               Cart.find(
-                (item) => item.product.id ==id
+                (item) => item.id ==id
               ) ? (
                 <Counter id={id}/>
               ) : (

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import './navbar.css';
+import { setCart } from '../../Store/action';
 
-function Navbar({ handlecategory, handlefilter, handleSearch}) {
+function Navbar({ handlecategory, handlefilter, handleSearch }) {
     const [menuActive, setMenuActive] = useState(false);
-    const Cart = useSelector((state) => state)
+    const Cart = useSelector((state) => state.cart)
+ 
 
     const toggleMenu = () => {
         setMenuActive(!menuActive);
@@ -21,7 +23,7 @@ function Navbar({ handlecategory, handlefilter, handleSearch}) {
     function handleUser() {
         navigate(`/user`);
     }
- 
+
     const [scrolled, setScrolled] = useState(false);
 
     const handleScroll = () => {
@@ -45,6 +47,7 @@ function Navbar({ handlecategory, handlefilter, handleSearch}) {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     return (
         <>
             <header className={`head ${scrolled ? 'scrolled' : ''}`}>
