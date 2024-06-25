@@ -13,11 +13,13 @@ function ProductPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Cart = useSelector((state) => state.cart);
-  const temp= useSelector((state) => state.user[0]._id)
+  const temp= useSelector((state) => state.user._id)
   const user=temp==""?0:temp;
   console.log("product user",user)
 
   useEffect(() => {
+  console.log("product fetch")
+
     axios.get(`http://localhost:5555/product/${id}`)
       .then((response) => {
         setProduct(response.data);
@@ -25,7 +27,7 @@ function ProductPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [id]);
+  });
 
   const handleBuyNow = () => {
     navigate(`/checkout/${id}/1/${product.price}`);

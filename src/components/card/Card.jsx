@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, addtocart, setCart } from "../../Store/action.js";
 import { useNavigate } from 'react-router-dom';
 
-function Card({ id,img, name, price}) {
+function Card({ id,name,price,img}) {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
   
   const Cart=useSelector((state) => state.cart)
-  const temp= useSelector((state) => state.user[0]._id)
+  const temp= useSelector((state) => state.user._id)
 const user=temp==""?0:temp;
 console.log("card user",user)
 

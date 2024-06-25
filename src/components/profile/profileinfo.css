@@ -1,0 +1,229 @@
+.userinfo,
+span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.userinfo {
+    margin-bottom: 4rem;
+    width: 80%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    flex-wrap: wrap;
+
+    .title {
+        text-align: left;
+        font-size: 1.2rem;
+        margin: 1rem;
+        padding: 0px;
+        width: 100%;
+        color: var(--subtext);
+
+    }
+
+    span {
+        width: 45%;
+
+        p {
+            text-align: center;
+            font-size: 10px;
+            color: #817d7d;
+            width: 25%;
+            text-wrap: nowrap;
+            margin-right: 1rem;
+            font-weight: 900;
+        }
+
+        input {
+            border: 0px solid var(--subtext);
+            margin-left: 1rem;
+            width: 80%;
+            margin-top: 2rem;
+            pointer-events: none;
+
+        }
+
+
+    }
+
+    input {
+        background-color: rgba(250, 248, 245, 0.985);
+    }
+
+    .edit {
+        cursor: pointer;
+        pointer-events: inherit;
+
+        border: 1px solid var(--subtext) !important;
+
+
+
+    }
+}
+
+.profilebtn {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+    .edit-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #fbe4e4;
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition-duration: 0.3s;
+        overflow: hidden;
+        position: relative;
+        text-decoration: none !important;
+    }
+
+    .edit-svgIcon {
+        width: 17px;
+        transition-duration: 0.3s;
+    }
+
+    .edit-svgIcon path {
+        fill: rgb(146, 143, 143);
+    }
+
+    .edit-button:hover {
+        width: 120px;
+        border-radius: 50px;
+        transition-duration: 0.3s;
+        background-color: rgb(255, 69, 69);
+        align-items: center;
+    }
+
+    .edit-button:hover .edit-svgIcon {
+        width: 20px;
+        transition-duration: 0.3s;
+        transform: translateY(60%);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+        path{
+            fill: rgb(219 219 219);
+
+        }
+
+    }
+
+    .edit-button::before {
+        display: none;
+        content: "Edit";
+        color: white;
+        transition-duration: 0.3s;
+        font-size: 2px;
+    }
+
+    .edit-button:hover::before {
+        display: block;
+        padding-right: 10px;
+        font-size: 13px;
+        opacity: 1;
+        transform: translateY(0px);
+        transition-duration: 0.3s;
+    }
+    .save{
+        button::before {
+            display: none;
+            content: "save";
+            color: white;
+            transition-duration: 0.3s;
+            font-size: 2px;
+        }
+    }
+
+
+    .signout {
+        button {
+            background-color: #fbe4e4;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            width: 10em;
+            height: 4rem;
+            border-radius: 1rem;
+            color: var(--subtext);
+            font-weight: 700;
+            box-shadow: 0 0.4rem #d1c1c1;
+            cursor: pointer;
+        }
+
+        button:active {
+            color: white;
+            box-shadow: 0 0.2rem #dfd9d9;
+            transform: translateY(0.2rem);
+        }
+
+        button:hover:not(:disabled) {
+            background: lightcoral;
+            color: white;
+            text-shadow: 0 0.1rem #bcb4b4;
+        }
+
+        button:disabled {
+            cursor: auto;
+            color: grey;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+/*lets make it responsive*/
+@media only screen and (max-width: 520px) {
+    #personalinfo {
+        padding-top: 5%;
+
+    }
+
+    .profile-main {
+        width: 100vw;
+        padding: 0rem;
+        margin: 0rem;
+        padding-bottom: 10%;
+
+    }
+
+    .userinfo {
+        flex-direction: column;
+        margin-bottom: 0px;
+
+
+        span {
+            width: 80% !important;
+
+            p {
+                width: 25% !important;
+
+            }
+
+            input {
+                width: 85% !important;
+            }
+        }
+    }
+
+}

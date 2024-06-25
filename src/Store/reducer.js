@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import axios from 'axios';
-const initialUserState = [{
+const initialUserState = {
   _id:"",
   email: '',
   getUpdates: false,
@@ -15,11 +15,10 @@ const initialUserState = [{
   phone: '',
   shippingMethod: '',
   paymentMethod: 'creditCard',
-}];
+};
 const initialState = [];
 let data = [];
 let temp=[];
-
 
 
 const fetchCart = async (id) => {
@@ -33,6 +32,8 @@ const fetchCart = async (id) => {
 
     } catch (err) {
       console.log(err.message);
+      data = [];
+
     }
   
 };
@@ -136,11 +137,18 @@ const cartReducer = (state = initialState, action) => {
 const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case 'setUser':
-      console.log("setUser",...action.payload)
+      console.log("setUser",action.payload)
       return {
         
         ...action.payload,
       };
+      case 'clearUser':
+        console.log("clearUser")
+      return {
+        
+        ...initialUserState,
+      };
+      
     default:
       return state;
   }

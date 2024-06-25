@@ -48,6 +48,13 @@ function Navbar({ handlecategory, handlefilter, handleSearch }) {
         };
     }, []);
 
+
+
+
+
+
+    
+
     return (
         <>
             <header className={`head ${scrolled ? 'scrolled' : ''}`}>

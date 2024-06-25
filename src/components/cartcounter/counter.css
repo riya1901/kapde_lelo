@@ -1,8 +1,11 @@
 .cartcount{
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
+    span{
+        width: 1.2rem !important;
+     }
 }
 .count{
     font-size: 20px;
@@ -14,11 +17,12 @@
  border: none;
  padding: 1rem;
  font-size: 1rem;
- width: 3em;
+ width: 3.4em;
  border-radius: 1rem;
  color: lightcoral;
  box-shadow: 0 0.4rem #dfd9d9;
  cursor: pointer;
+
 }
 
 .btn:active {

@@ -6,7 +6,7 @@ import './counter.css'
 const Counter = ({id}) => {
   const cart=useSelector((state) => state.cart);
  console.log("counter",cart)
- const temp= useSelector((state) => state.user[0]._id)
+ const temp= useSelector((state) => state.user._id)
 const user=temp==""?0:temp;
   const dispatch = useDispatch();
   return (

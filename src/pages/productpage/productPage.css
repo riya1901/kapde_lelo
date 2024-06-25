@@ -42,6 +42,11 @@
         color: #5a5555 !important;
         font-weight: bolder;
     }
+                
+    span{
+        width: auto;
+    }            
+
 
     .details {
         display: flex;
@@ -57,13 +62,20 @@
             padding: 1rem;
         }
 
+
         .price {
             font-size: 4rem;
             color: var(--primarytext);
             padding-top: 0px;
             margin-top: 0px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: left;
+        
 
             span {
+                margin-left: 1rem;
                 color: var(--subtext);
                 text-decoration: line-through;
                 font-size: 3rem;
@@ -76,6 +88,10 @@
 
         }
         .review{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: left;
             margin-top: 0px;
             padding-top: 0px;
             span{
@@ -115,8 +131,10 @@
         height: 5rem;
         font-size: 2rem;
     }
-
-}
+    span{
+        width: 100%;
+    }
+    
 .pushable {
     position: relative;
     background: transparent;
@@ -197,6 +215,8 @@
   .pushable:focus:not(:focus-visible) {
     outline: none;
   }
+
+}
   /*Responsive*/
 
   @media only screen and (max-width: 1150px) {

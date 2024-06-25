@@ -4,13 +4,18 @@ import './category.css'
 import axios from 'axios';
 import Loader from '../loader/loader.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart } from '../../Store/action.js';
+import { setCart, setUser } from '../../Store/action.js';
 
 function Category({ title, categoryvalue }) {
+  console.log("category called");
+
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  console.log("category cat value",categoryvalue);
  
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,13 +53,10 @@ function Category({ title, categoryvalue }) {
       </div>
       <div className="products">
         {productData.map((product) => (
-          <Card
-            key={product._id}
-            id={product._id}
-            img={product.image}
-            name={product.title}
-            price={product.price}
-          />
+          <Card key={product._id} id={product._id}
+          img={product.image}
+          name={product.title}
+          price={product.price}/>
         ))}
       </div>
     </>

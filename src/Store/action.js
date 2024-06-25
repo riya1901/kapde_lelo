@@ -11,16 +11,16 @@ const addtocart = (data) => {
 };
 
 const updateCart = (data) => {
-return (dispatch) => {
-  dispatch({
-    type: 'updateCart',
-    payload: data
-  });
-};
+  return (dispatch) => {
+    dispatch({
+      type: 'updateCart',
+      payload: data
+    });
+  };
 };
 
 const removefromcart = (data) => {
-  console.log("remove",data);
+  console.log("remove", data);
   return (dispatch) => {
     dispatch({
       type: 'removefromcart',
@@ -28,19 +28,20 @@ const removefromcart = (data) => {
     });
   };
 };
-const clearCart=()=>{
-  return(dispatch)=>{
+const clearCart = () => {
+  return (dispatch) => {
     dispatch({
       type: 'clearcart'
     });
   }
 }
 const setCart = (id) => {
+  
 
   return (dispatch) => {
     dispatch({
       type: 'setCart',
-      payload:id
+      payload: id
     });
   };
 };
@@ -58,59 +59,108 @@ const setUser = (userInfo) => {
 };
 
 
+const clearUser = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'clearUser',
+    });
+  };
+};
 
 
 
-const addItem=(id,user=0)=>{
+const addItem = (id, user = 0) => {
 
-  return async(dispatch)=>{
+  return async (dispatch) => {
     const newItem = [{ quantity: 1, id: id, user: user }];
-      console.log("item",newItem)
-  try{
-    if(user!=0){
+    console.log("item", newItem)
+    try {
+      if (user != 0) {
 
-      const response= await axios.post(`http://localhost:5555/cartnew`,newItem[0]);
-      console.log("response",response.data)
+        const response = await axios.post(`http://localhost:5555/cartnew`, newItem[0]);
+        console.log("response", response.data)
+        dispatch({
+          type: 'addItemnew',
+          payload: response.data,
+        });
+      }
+      else {
+        dispatch({
+          type: 'addItemnew',
+          payload: newItem[0],
+        });
+      }
+
+
+    } catch (err) {
+      console.error(err.message);
+    }
+
+  }
+
+}
+const getUser = (user) => {
+
+  return async (dispatch) => {
+
+    console.log("action user", user)
+    try {
+      console.log("called");
+      const response = await axios.get(`http://localhost:5555/getuser/${user.email}/${user.pass}`, user);
+      console.log("response", response.data[0]);
       dispatch({
-        type: 'addItemnew',
+        type: 'setUser',
+        payload: response.data[0],
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+
+  }
+}
+const updateUser = (id,data) => {
+
+  return async (dispatch) => {
+
+    console.log("action userdata", data)
+    try {
+      console.log("called update user");
+      const response = await axios.put(`http://localhost:5555/${id}`, data);
+      console.log("response", response.data);
+      dispatch({
+        type: 'setUser',
         payload: response.data,
       });
-    }
-    else{
-      dispatch({
-        type: 'addItemnew',
-        payload: newItem,
-      });
-    }
-    
-    
-  }catch(err) {
+    } catch (err) {
       console.error(err.message);
-  }
-  
-  }
+    }
 
-}
-const getUser=()=>{
-
- return async(dispatch)=>{
-    const user = [{ email:'me@dfh',pass:'asdf' }];
-    console.log(user[0])
-  try{
-    console.log("called")
-
-    const response= await axios.get(`http://localhost:5555/getuser/${user[0].email}/${user[0].pass}`,user[0]);
-    console.log("response",response.data)
-    dispatch({
-      type: 'setUser',
-      payload: response.data,
-    });
-  }catch(err) {
-      console.error(err.message);
-  }
-  
   }
 }
 
+const newUser = (user) => {
 
-export { addtocart, updateCart, removefromcart,clearCart,setUser,setCart,addItem,getUser };
+  return async (dispatch) => {
+    console.log("new user", user)
+    try {
+      if (user != 0) {
+
+        const response = await axios.post(`http://localhost:5555/user`, user);
+        console.log("response", response.data)
+        dispatch({
+          type: 'setUser',
+          payload: response.data,
+        });
+      }
+
+
+    } catch (err) {
+      console.error(err.message);
+    }
+
+  }
+
+}
+
+
+export { addtocart, updateCart, removefromcart, clearCart, setUser, setCart, addItem, getUser,updateUser,clearUser,newUser};
