@@ -18,14 +18,14 @@ import Profile from './pages/user/Profile.jsx';
 import Loader from './components/loader/loader.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, setCart, setUser } from './Store/action.js';
+import Order from './pages/order/order.jsx';
 
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
   const [filtereddata, updatefiltereddata] = useState();
   const [search, setSearch] = useState("");
   const [loading, setloading] = useState(true);
-  const temp = useSelector((state) => state.user._id)
-  const user = temp == "" ? 0 : temp;
+  const[userlogged,setuserlogged]=useState(false)
 
   const dispatch = useDispatch();
 
@@ -58,6 +58,7 @@ function App() {
       const items = await localStorage.getItem('user');
       console.log("app fetch", items)
       if (items) {
+        setuserlogged(true)
         const parsed = JSON.parse(items)
         console.log("setcart", parsed)
         setTimeout(() => {
@@ -94,7 +95,7 @@ function App() {
 
     createRoutesFromElements(
 
-      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory} handleSearch={handleSearch} />}>
+      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory} handleSearch={handleSearch} user={userlogged}/>}>
         <Route path='' element={<Hero categoryvalue={categoryvalue} />} />
         <Route path='Mens/' element={<Category title="Mens Wear" categoryvalue={categoryvalue} />} />
         <Route path='womens/' element={<Category title="womens Wear" categoryvalue={categoryvalue} />} />
@@ -104,7 +105,9 @@ function App() {
         <Route path='checkout/:id?/:len/:price' element={<Checkout />}>
           <Route path=':id' element={<Checkout />} />
         </Route>
-        <Route path='user/' element={<Profile />} />
+        <Route path='user/' element={<Profile userlogged={setuserlogged}/>}/>
+        <Route path='user/orders' element={<Order />} />
+        
       </Route>
     )
   );

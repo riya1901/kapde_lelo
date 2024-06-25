@@ -6,12 +6,12 @@ import Footer from './components/Footer/Footer'
 import { useDispatch } from 'react-redux';
 import { setCart, setUser } from './Store/action.js';
 
-function Layout({handlecategory,handlefilter,handleSearch}) {
+function Layout({handlecategory,handlefilter,handleSearch,user}) {
   
 
   return (
    <>
-   <Navbar handlecategory={handlecategory} handlefilter={handlefilter}  handleSearch={handleSearch}  />
+   <Navbar handlecategory={handlecategory} handlefilter={handlefilter}  handleSearch={handleSearch} user={user} />
    <Outlet/>
    <Footer/>
    </>

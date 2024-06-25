@@ -119,7 +119,6 @@ const getUser = (user) => {
   }
 }
 const updateUser = (id,data) => {
-
   return async (dispatch) => {
 
     console.log("action userdata", data)

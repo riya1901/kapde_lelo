@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import './navbar.css';
 import { setCart } from '../../Store/action';
 
-function Navbar({ handlecategory, handlefilter, handleSearch }) {
+function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
     const [menuActive, setMenuActive] = useState(false);
     const Cart = useSelector((state) => state.cart)
- 
+
 
     const toggleMenu = () => {
         setMenuActive(!menuActive);
@@ -53,7 +53,7 @@ function Navbar({ handlecategory, handlefilter, handleSearch }) {
 
 
 
-    
+
 
     return (
         <>
@@ -91,10 +91,24 @@ function Navbar({ handlecategory, handlefilter, handleSearch }) {
                             </Link>
                             <p>{Object.keys(Cart).length}</p>
                         </li>
-                        <li className="profile" onClick={handleUser}>
-                            <Link to='/'>
-                                <img className='prof' src="/src/assets/user.png" alt="Profile" />
-                            </Link>
+                        <li className="profile" >
+                            <div className="dropdown">
+                            <img className='prof' src="/src/assets/user.png" alt="Profile" />
+                                <div className="dropdown-content">
+                                    {user?(<><div className="dropdown-item"onClick={handleUser}>
+                                profile
+                                </div>
+                                <div className="dropdown-item"onClick={()=>{navigate(`/user/orders`)}}>
+                                orders
+                                </div></>):(<div className="dropdown-item"onClick={handleUser}>
+                                login
+                                </div>
+                                )}
+                                
+                                
+                                </div>
+                            </div>
+                            
                         </li>
                         <div className="hamburger" onClick={toggleMenu}>
                             <span className="bar"></span>

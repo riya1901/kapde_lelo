@@ -97,7 +97,40 @@ a {
 
 .profile {
     
+    
     margin-right: 2rem;
+    .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .dropdown-content {
+        padding-top: 1rem;
+        display: none;
+        width: 100px;
+        left: -60px;
+        border-radius: 9px;
+        position: absolute;
+        background-color: #D9D9D9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+      }
+      .dropdown-item{
+        font-size: 2rem;
+        color: var(--primarytext);
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 1rem;
+      }
+      .dropdown-item:hover{
+        color: var(--activecolor);
+      }
+
+      
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
 }
 
 .cart {

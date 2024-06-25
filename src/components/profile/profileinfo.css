@@ -225,5 +225,7 @@ span {
             }
         }
     }
-
+    .profilebtn{
+        margin-top: 2rem;
+    }
 }

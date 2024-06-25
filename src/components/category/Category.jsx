@@ -3,8 +3,6 @@ import Card from '../card/Card.jsx';
 import './category.css'
 import axios from 'axios';
 import Loader from '../loader/loader.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCart, setUser } from '../../Store/action.js';
 
 function Category({ title, categoryvalue }) {
   console.log("category called");
