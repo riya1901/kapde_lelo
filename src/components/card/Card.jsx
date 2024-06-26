@@ -2,7 +2,7 @@ import React,{useEffect,useState,useRef}from 'react'
 import './card.css';
 import Counter from '../cartcounter/Counter.jsx';
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, addtocart, setCart } from "../../Store/action.js";
+import { addItem } from "../../Store/action.js";
 import { useNavigate } from 'react-router-dom';
 
 function Card({ id,name,price,img}) {

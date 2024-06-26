@@ -18,7 +18,7 @@ function Order() {
 
         try {
             const response =
-                await axios.get(`http://localhost:5555/getorder/${user._id}`)
+                await axios.get(`https://kapde-lelo-server.onrender.com/getorder/${user._id}`)
 
             setOrderData(response.data);
         } catch (err) {

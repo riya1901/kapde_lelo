@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from './Store';
 
 const addtocart = (data) => {
   return (dispatch) => {

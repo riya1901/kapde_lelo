@@ -4,9 +4,8 @@ import PaymentForm from './PaymentForm';
 import ShippingForm from './ShipingForm';
 import './checkoutform.css';
 import { useDispatch, useSelector } from "react-redux";
-import { removefromcart ,clearCart, newOrder, buyNowcart} from "../../Store/action";
+import {  newOrder, buyNowcart} from "../../Store/action";
 import { useNavigate } from 'react-router-dom';
-import OrderItem from '../orderItem/orderItem';
 const Out = ({id=0,total}) => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({

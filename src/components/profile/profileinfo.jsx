@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import "./profileinfo.css"
 import { useDispatch } from 'react-redux';
 import { clearUser, setCart, updateUser } from '../../Store/action';
-import { Link, useNavigate } from 'react-router-dom';
 function Profileinfo({ user, setisuser }) {
     const [userdata, setuserdata] = useState(user);
     const [isedit, setisedit] = useState(false);
     const dispatch=useDispatch();
-    const navigate = useNavigate();
 
     const handChange = (e) => {
 

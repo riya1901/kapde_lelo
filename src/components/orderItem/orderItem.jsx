@@ -1,15 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import './orderitem.css'
-import { useNavigate } from 'react-router-dom';
 
 function OrderItem(order) {
   const [orderitems, setorderitems] = useState({})
   const[expand,setexpand]=useState(false)
-  const navigate=useNavigate();
   async function find(id) {
     try {
-      const response = await axios.get(`http://localhost:5555/product/${id}`);
+      const response = await axios.get(`https://kapde-lelo-server.onrender.com/product/${id}`);
       return response.data;
     } catch (error) {
       console.log(error);

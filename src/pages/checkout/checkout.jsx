@@ -1,14 +1,10 @@
-import React, { useState, useMemo, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Productdata from "../../assets/productdata.json";
-import { useSelector } from 'react-redux';
 import './checkout.css'
 import Out from '../../components/checkoutform/out'
 
 function Checkout() {
 
     const { id, len,price } = useParams()
-    const Cart = useSelector((state) => state.cart);
     
     return (
         

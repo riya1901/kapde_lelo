@@ -4,7 +4,7 @@ import './category.css'
 import axios from 'axios';
 import Loader from '../loader/loader.jsx';
 
-function Category({ title, categoryvalue }) {
+function Category({ title, categoryvalue ,search}) {
   console.log("category called");
 
   const [productData, setProductData] = useState([]);
@@ -19,12 +19,19 @@ function Category({ title, categoryvalue }) {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
-      try {
+      try {if(search==""){
         const response = categoryvalue !== ""
-          ? await axios.get(`http://localhost:5555/category/${categoryvalue}`)
-          : await axios.get("http://localhost:5555/items");
+          ? await axios.get(`https://kapde-lelo-server.onrender.com/category/${categoryvalue}`)
+          : await axios.get("https://kapde-lelo-server.onrender.com/items");
 
         setProductData(response.data);
+        
+      }else {
+        const response = 
+          await axios.get(`https://kapde-lelo-server.onrender.com/search/${search}`)
+          console.log("search called",search)
+        setProductData(response.data);
+      }
       } catch (err) {
         setError(err.message);
       }
@@ -32,7 +39,7 @@ function Category({ title, categoryvalue }) {
     };
 
     fetchData();
-  }, [categoryvalue]);
+  }, [categoryvalue,search]);
 
   if (loading) {
 
@@ -47,7 +54,7 @@ function Category({ title, categoryvalue }) {
   return (
     <>
       <div>
-        <div className='title'><p>{title}</p></div>
+        <div className='title'><p>{search==""?title:"Search Result"}</p></div>
       </div>
       <div className="products">
         {productData.map((product) => (

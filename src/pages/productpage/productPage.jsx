@@ -25,7 +25,7 @@ function ProductPage() {
   const fetchProduct = () => {
     console.log("product fetch")
 
-    axios.get(`http://localhost:5555/product/${id}`)
+    axios.get(`https://kapde-lelo-server.onrender.com/product/${id}`)
       .then((response) => {
         setProduct(response.data);
         isLoading(false)

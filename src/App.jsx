@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import ReactDOM from 'react-dom/client'
 import './App.css'
 import Layout from './Layout.jsx'
-import Productdata from "./assets/productdata.json";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,16 +15,15 @@ import Cart from './pages/cart/cart.jsx';
 import Checkout from './pages/checkout/checkout.jsx';
 import Profile from './pages/user/Profile.jsx';
 import Loader from './components/loader/loader.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser, setCart, setUser } from './Store/action.js';
+import { useDispatch } from 'react-redux';
+import { setCart, setUser } from './Store/action.js';
 import Order from './pages/order/order.jsx';
 
 function App() {
   const [categoryvalue, setcategoryvalue] = useState("");
-  const [filtereddata, updatefiltereddata] = useState();
   const [search, setSearch] = useState("");
   const [loading, setloading] = useState(true);
-  const[userlogged,setuserlogged]=useState(false)
+  const [userlogged, setuserlogged] = useState(false)
 
   const dispatch = useDispatch();
 
@@ -44,10 +42,6 @@ function App() {
   }, []);
 
 
-  useEffect(() => {
-    const NewData = Productdata.filter(product => product.title.toLowerCase().includes(search.toLowerCase()));
-    updatefiltereddata(NewData);
-  }, [search]);
 
 
 
@@ -95,19 +89,19 @@ function App() {
 
     createRoutesFromElements(
 
-      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory} handleSearch={handleSearch} user={userlogged}/>}>
-        <Route path='' element={<Hero categoryvalue={categoryvalue} />} />
-        <Route path='Mens/' element={<Category title="Mens Wear" categoryvalue={categoryvalue} />} />
-        <Route path='womens/' element={<Category title="womens Wear" categoryvalue={categoryvalue} />} />
-        <Route path='kids/' element={<Category title="kids Wear" categoryvalue={categoryvalue} />} />
+      <Route path='/' element={<Layout handlefilter={handlefilter} handlecategory={handlecategory} handleSearch={handleSearch} user={userlogged} />}>
+        <Route path='' element={<Hero categoryvalue={categoryvalue} search={search} />} />
+        <Route path='Mens/' element={<Category title="Mens Wear" categoryvalue={categoryvalue} search={search} />} />
+        <Route path='womens/' element={<Category title="womens Wear" categoryvalue={categoryvalue} search={search} />} />
+        <Route path='kids/' element={<Category title="kids Wear" categoryvalue={categoryvalue} />} search={search} />
         <Route path='productpage/:id' element={<ProductPage />} />
         <Route path='cart/' element={<Cart />} />
         <Route path='checkout/:id?/:len/:price' element={<Checkout />}>
           <Route path=':id' element={<Checkout />} />
         </Route>
-        <Route path='user/' element={<Profile userlogged={setuserlogged}/>}/>
+        <Route path='user/' element={<Profile userlogged={setuserlogged} />} />
         <Route path='user/orders' element={<Order />} />
-        
+
       </Route>
     )
   );

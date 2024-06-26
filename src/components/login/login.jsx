@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './login.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, newUser, setCart, setUser } from '../../Store/action';
+import { getUser, newUser } from '../../Store/action';
 function Login({ setuser, setkeeplogged }) {
     const dispatch = useDispatch();
     const [loginValues, setloginValues] = useState({

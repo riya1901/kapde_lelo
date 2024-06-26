@@ -26,7 +26,7 @@ const fetchCart = async (id) => {
 
   try {
     const response =
-      await axios.get(`http://localhost:5555/cart/${id}`);
+      await axios.get(`https://kapde-lelo-server.onrender.com/cart/${id}`);
     data = response.data;
     console.log("cart reducer", data)
 
@@ -38,25 +38,11 @@ const fetchCart = async (id) => {
 
 };
 
-const add = async (data) => {
 
-  try {
-    await axios.post(`http://localhost:5555/cartnew`, data).then(
-      (response) => {
-        temp = response.data;
-      }
-    );
-
-
-  } catch (err) {
-    console.log(err.message);
-  }
-
-};
 const update = async (id, data) => {
   try {
 
-    await axios.put(`http://localhost:5555/cartup/${id}`, data);
+    await axios.put(`https://kapde-lelo-server.onrender.com/cartup/${id}`, data);
 
   } catch (err) {
     console.log(err.message);
@@ -67,7 +53,7 @@ const remove = async (id) => {
   console.log("removeIP", id)
   try {
 
-    await axios.delete(`http://localhost:5555/cartdel/${id}`);
+    await axios.delete(`https://kapde-lelo-server.onrender.com/cartdel/${id}`);
 
   } catch (err) {
     console.log(err.message);

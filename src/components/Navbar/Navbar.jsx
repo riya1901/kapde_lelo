@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import './navbar.css';
-import { setCart } from '../../Store/action';
 
 function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
     const [menuActive, setMenuActive] = useState(false);
@@ -34,10 +33,13 @@ function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
         }
     };
     const handlesearch = (e) => {
-        console.log("search")
-        if (e.keyCode === 13) {
-            handleSearch(e);
-        }
+        setTimeout(()=>{
+
+            if (e.keyCode === 13||e.target.value=="") {
+                handleSearch(e);
+            }
+            
+        },50)
     }
 
 
