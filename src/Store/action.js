@@ -75,7 +75,7 @@ const addItem = (id, user = 0) => {
     try {
       if (user != 0) {
 
-        const response = await axios.post(`http://localhost:5555/cartnew`, newItem[0]);
+        const response = await axios.post(`https://kapde-lelo-server.onrender.com/cartnew`, newItem[0]);
         dispatch({
           type: 'addItemnew',
           payload: response.data,
@@ -101,7 +101,7 @@ const getUser = (user) => {
   return async (dispatch) => {
 
     try {
-      const response = await axios.get(`http://localhost:5555/getuser/${user.email}/${user.pass}`, user);
+      const response = await axios.get(`https://kapde-lelo-server.onrender.com/getuser/${user.email}/${user.pass}`, user);
       dispatch({
         type: 'setUser',
         payload: response.data[0],
@@ -116,7 +116,7 @@ const updateUser = (id,data) => {
   return async (dispatch) => {
 
     try {
-      const response = await axios.put(`http://localhost:5555/${id}`, data);
+      const response = await axios.put(`https://kapde-lelo-server.onrender.com/${id}`, data);
       dispatch({
         type: 'setUser',
         payload: response.data,
@@ -134,7 +134,7 @@ const newUser = (user) => {
     try {
       if (user != 0) {
 
-        const response = await axios.post(`http://localhost:5555/user`, user);
+        const response = await axios.post(`https://kapde-lelo-server.onrender.com/user`, user);
         dispatch({
           type: 'setUser',
           payload: response.data,
@@ -154,7 +154,7 @@ const newOrder = (order) => {
 
   return async (dispatch) => {
     try {
-         await axios.post(`http://localhost:5555/order`, order);
+         await axios.post(`https://kapde-lelo-server.onrender.com/order`, order);
         dispatch({
           type: 'clearCart',
         });
@@ -166,7 +166,7 @@ const newOrder = (order) => {
 const buyNowcart = (id,order) => {
   return async (dispatch) => {
     try {
-        const response = await axios.post(`http://localhost:5555/order`, order);
+        const response = await axios.post(`https://kapde-lelo-server.onrender.com/order`, order);
         dispatch({
           type: 'buyNowcart',
           payload: id,
