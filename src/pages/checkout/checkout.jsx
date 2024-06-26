@@ -20,8 +20,8 @@ function Checkout() {
                 <div className="cart-main">
                     {
                         (id==null)?
-                        (<Out/>):
-                        (<Out id={id}/>)
+                        (<Out total={price}/>):
+                        (<Out id={id} total={price}/>)
 
                     }
 

@@ -9,25 +9,34 @@ import axios from 'axios';
 
 function ProductPage() {
   const [product, setProduct] = useState({});
+  const [loading, isLoading] = useState(true)
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Cart = useSelector((state) => state.cart);
-  const temp= useSelector((state) => state.user._id)
-  const user=temp==""?0:temp;
-  console.log("product user",user)
+  const temp = useSelector((state) => state.user._id)
+  const user = temp == "" ? 0 : temp;
+  console.log("product user", user)
 
   useEffect(() => {
-  console.log("product fetch")
+    if (product == null)
+      isLoading(true)
+  })
+  const fetchProduct = () => {
+    console.log("product fetch")
 
     axios.get(`http://localhost:5555/product/${id}`)
       .then((response) => {
         setProduct(response.data);
+        isLoading(false)
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }
+  if (loading) {
+    fetchProduct();
+  }
 
   const handleBuyNow = () => {
     navigate(`/checkout/${id}/1/${product.price}`);
@@ -35,11 +44,11 @@ function ProductPage() {
 
   const handleAddToCart = () => {
     console.log("cartadd")
-    dispatch(addItem(id,user));
+    dispatch(addItem(id, user));
   }
 
   const isInCart = useMemo(
-    () => Cart.find(item => item.id ==id),
+    () => Cart.find(item => item.id == id),
     [Cart, id]
   );
 
@@ -54,8 +63,8 @@ function ProductPage() {
                 <p className='title'>{product.title}</p>
                 <p className='special'>offer price</p>
                 <p className='price'>
-                  MRP: <span className='offer'>${product.price}</span> 
-                  <span>{(product.price * 1.20).toFixed(2)}</span> 
+                  MRP: <span className='offer'>${product.price}</span>
+                  <span>{(product.price * 1.20).toFixed(2)}</span>
                   <span className='offer'>20% off</span>
                 </p>
                 <p className="review">

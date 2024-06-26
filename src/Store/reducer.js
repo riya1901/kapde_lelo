@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import axios from 'axios';
 const initialUserState = {
-  _id:"",
+  _id: "",
   email: '',
   getUpdates: false,
   country: 'India',
@@ -18,45 +18,45 @@ const initialUserState = {
 };
 const initialState = [];
 let data = [];
-let temp=[];
+let temp = [];
 
 
 const fetchCart = async (id) => {
-  console.log("fetch called",id);
-  
-    try {
-      const response =
+  console.log("fetch called", id);
+
+  try {
+    const response =
       await axios.get(`http://localhost:5555/cart/${id}`);
-      data = response.data;
-      console.log("cart reducer",data)
+    data = response.data;
+    console.log("cart reducer", data)
 
-    } catch (err) {
-      console.log(err.message);
-      data = [];
+  } catch (err) {
+    console.log(err.message);
+    data = [];
 
-    }
-  
+  }
+
 };
 
 const add = async (data) => {
-  
+
   try {
-     await axios.post(`http://localhost:5555/cartnew`,data).then(
-     (response)=>{
-       temp=response.data;
-     }  
+    await axios.post(`http://localhost:5555/cartnew`, data).then(
+      (response) => {
+        temp = response.data;
+      }
     );
-     
+
 
   } catch (err) {
     console.log(err.message);
   }
 
 };
-const update = async (id,data) => {
+const update = async (id, data) => {
   try {
-    
-      await axios.put(`http://localhost:5555/cartup/${id}`,data);
+
+    await axios.put(`http://localhost:5555/cartup/${id}`, data);
 
   } catch (err) {
     console.log(err.message);
@@ -64,10 +64,10 @@ const update = async (id,data) => {
 
 };
 const remove = async (id) => {
-  console.log("removeIP",id)
+  console.log("removeIP", id)
   try {
-    
-      await axios.delete(`http://localhost:5555/cartdel/${id}`);
+
+    await axios.delete(`http://localhost:5555/cartdel/${id}`);
 
   } catch (err) {
     console.log(err.message);
@@ -88,41 +88,49 @@ const cartReducer = (state = initialState, action) => {
 
       if (existingProduct) {
         existingProduct.quantity++;
-        if(action.payload.user!=0)  
-        update(existingProduct._id, existingProduct);
+        if (action.payload.user != 0)
+          update(existingProduct._id, existingProduct);
         return [...newState];
       }
 
       return [...newState];
-      
-      case 'addItemnew':
-        if(initialUserState._id!="")  
-        return[...newState,action.payload]
+
+    case 'addItemnew':
+      if (initialUserState._id != "")
+        return [...newState, action.payload]
       else
-      return[...newState,action.payload]
+        return [...newState, action.payload]
 
 
     case 'removefromcart':
-      console.log(initialUserState._id,"id")
 
       index = newState.findIndex(item => item.id === action.payload.id);
       if (newState[index].quantity === 1) {
-        if(action.payload.user!=0)  
-        remove(newState[index]._id);
+        if (action.payload.user != 0)
+          remove(newState[index]._id);
         newState.splice(index, 1);
       } else {
         newState[index].quantity--;
-        if(action.payload.user!=0)  
-        update(newState[index]._id, newState[index]);
+        if (action.payload.user != 0)
+          update(newState[index]._id, newState[index]);
       }
       return newState;
-    case 'clearcart':
-      if(initialUserState._id!=""){
+    case 'buyNowcart':
+      console.log("buy now reducer", action.payload)
+      index = newState.findIndex(item => item.id === action.payload);
+          remove(newState[index]._id);
+        newState.splice(index, 1);
+      
+      return newState;
+    case 'clearCart':
+      console.log("clearCart called")
 
-        newState.foreach((item)=>{
-          remove(item._id);
-        })
-      }
+      newState.map(async (item) => {
+        console.log("cleared", item._id)
+
+        await remove(item._id);
+      })
+
       return [];
     case 'setCart':
       fetchCart(action.payload);
@@ -137,18 +145,18 @@ const cartReducer = (state = initialState, action) => {
 const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case 'setUser':
-      console.log("setUser",action.payload)
+      console.log("setUser", action.payload)
       return {
-        
+
         ...action.payload,
       };
-      case 'clearUser':
-        console.log("clearUser")
+    case 'clearUser':
+      console.log("clearUser")
       return {
-        
+
         ...initialUserState,
       };
-      
+
     default:
       return state;
   }

@@ -28,6 +28,7 @@ const removefromcart = (data) => {
     });
   };
 };
+
 const clearCart = () => {
   return (dispatch) => {
     dispatch({
@@ -161,5 +162,35 @@ const newUser = (user) => {
 
 }
 
+const newOrder = (order) => {
 
-export { addtocart, updateCart, removefromcart, clearCart, setUser, setCart, addItem, getUser,updateUser,clearUser,newUser};
+  return async (dispatch) => {
+    console.log("new user", order)
+    try {
+        const response = await axios.post(`http://localhost:5555/order`, order);
+        console.log("response of new order", response.data)
+        dispatch({
+          type: 'clearCart',
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+}
+const buyNowcart = (id,order) => {
+  return async (dispatch) => {
+    try {
+        const response = await axios.post(`http://localhost:5555/order`, order);
+        console.log("response of new order", response.data)
+        dispatch({
+          type: 'buyNowcart',
+          payload: id,
+        });
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+};
+
+
+export { addtocart, updateCart, removefromcart, clearCart, setUser, setCart, addItem, getUser,updateUser,clearUser,newUser,newOrder,buyNowcart};

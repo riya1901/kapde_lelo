@@ -3,6 +3,7 @@ import './order.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/loader/loader';
+import OrderItem from '../../components/orderItem/orderItem';
 function Order() {
     const [loading, setLoading] = useState(true);
     const [orderData, setOrderData] = useState();
@@ -32,16 +33,25 @@ function Order() {
 
     return (
         <div className="profilepage">
-            <div className="profile-main">
-                <div className="main">
-                    {(loading) ?
-                        <div className='lmain'><Loader /></div> : <>your orders </>
 
-                    }
+            <div className="main">
+                {(loading) ? (
+
+                    <div className='lmain'><Loader /></div>
+                ) : (
+                    orderData.map((order) => (
+                        
+
+                        <OrderItem key={order._id} order={order} />
+                    ))
+                )
 
 
-                </div>
+                }
+
+
             </div>
+
         </div>
     )
 }

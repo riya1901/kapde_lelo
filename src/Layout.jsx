@@ -12,7 +12,7 @@ function Layout({handlecategory,handlefilter,handleSearch,user}) {
   return (
    <>
    <Navbar handlecategory={handlecategory} handlefilter={handlefilter}  handleSearch={handleSearch} user={user} />
-   <Outlet/>
+   <Outlet style={{height:"100vh"}}/>
    <Footer/>
    </>
   )

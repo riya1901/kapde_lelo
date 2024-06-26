@@ -3,10 +3,11 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import ShippingForm from './ShipingForm';
 import './checkoutform.css';
-import { useDispatch } from "react-redux";
-import { removefromcart ,clearCart} from "../../Store/action";
+import { useDispatch, useSelector } from "react-redux";
+import { removefromcart ,clearCart, newOrder, buyNowcart} from "../../Store/action";
 import { useNavigate } from 'react-router-dom';
-const Out = ({id=0}) => {
+import OrderItem from '../orderItem/orderItem';
+const Out = ({id=0,total}) => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState({
     email: '',
@@ -25,15 +26,47 @@ const Out = ({id=0}) => {
   });
   const dispatch = useDispatch();
   const navigate=useNavigate();
+  const Cart = useSelector((state) => state.cart);
+  const user=useSelector((state) => state.user._id)
 
-  const nextStep = () => {   if(step==3){
+
+  const nextStep = async() => {   if(step==3){
     if(id!=0){
-      dispatch(removefromcart(id))
+      console.log("buy now processed",id)
+      const index = Cart.findIndex(item => item.id == id)
+      console.log("buy now index",index)
 
+      const temp = [{ item:Cart[index].id, quantity: Cart[index].quantity }]
+      const order={
+        orderItems:temp,
+        user:user,
+        details:formValues,
+        total:total
+      }
+      console.log("buy now order",order)
+
+      dispatch(buyNowcart(id,order))
     }
     else{
-      dispatch(clearCart())
+      
+      const temp = await Promise.all(
+        Cart.map(async (item) => {
+            return { item:item.id, quantity: item.quantity };
+        })
+      );
+       
+      const order={
+        orderItems:[...temp],
+        user:user,
+        details:formValues,
+        total:total
+
+      }
+      console.log("out order",order)
+      await dispatch(newOrder(order))
     }
+
+
     alert("order has been sucessfully placed");
     navigate('/');
     window.scrollTo(0, 0);
