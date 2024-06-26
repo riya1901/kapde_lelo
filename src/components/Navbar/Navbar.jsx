@@ -63,7 +63,7 @@ function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
                 <nav className="nav">
                     <Link to='/' onClick={handlefilter}>
                         <div className='nav-logo'>
-                            <img className='logo' src="\src\assets\shop.png" alt="Logo" />
+                            <img className='logo' src="\shop.png" alt="Logo" />
                             <p className='logo-name'>Kapde Wale</p>
                         </div>
                     </Link>
@@ -89,13 +89,13 @@ function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
                         </div>
                         <li className="cart" onClick={handlecart}>
                             <Link to='/'>
-                                <img className='prof' src="/src/assets/shopping-bag.png" alt="Cart" />
+                                <img className='prof' src="/shopping-bag.png" alt="Cart" />
                             </Link>
                             <p>{Object.keys(Cart).length}</p>
                         </li>
                         <li className="profile" >
                             <div className="dropdown">
-                            <img className='prof' src="/src/assets/user.png" alt="Profile" />
+                            <img className='prof' src="/user.png" alt="Profile" />
                                 <div className="dropdown-content">
                                     {user?(<><div className="dropdown-item"onClick={handleUser}>
                                 profile

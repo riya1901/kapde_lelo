@@ -1,11 +1,11 @@
-// CustomCarousel.js
+
 import React, { useState, useEffect } from 'react';
 import './Carousel.css';
 
 const images = [
-  "src/components/carosel/carousel1.png",
-  "src/components/carosel/carousel2.png",
-  "src/components/carosel/carousel3.png"
+  "/carousel1.png",
+  "/carousel2.png",
+  "/carousel3.png"
 ];
 
 const Carousel = () => {
