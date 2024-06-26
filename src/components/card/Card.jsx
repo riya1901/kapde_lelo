@@ -12,7 +12,7 @@ function Card({ id,name,price,img}) {
   const Cart=useSelector((state) => state.cart)
   const temp= useSelector((state) => state.user._id)
 const user=temp==""?0:temp;
-console.log("card user",user)
+console.log("card user",use)
 
 
   useEffect(() => {
