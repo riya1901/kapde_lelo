@@ -279,7 +279,7 @@
     }
     .suggestion {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         .title{
             font-size: 3rem;
         }
