@@ -97,7 +97,7 @@ function ProductPage() {
         </div>
         <hr className="divider" />
         <div className='suggestion'>
-          <Category title="Things you might like" categoryvalue={""} />
+          <Category title="Things you might like" categoryvalue={""} search={""} />
         </div>
       </div>
     </div>
