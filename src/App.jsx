@@ -55,7 +55,7 @@ function App() {
         setTimeout(() => {
 
           setloading(false)
-        }, 300);
+        }, 500);
         dispatch(setUser(parsed))
         dispatch(setCart(parsed._id));
       }
