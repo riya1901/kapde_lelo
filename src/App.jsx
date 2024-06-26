@@ -34,7 +34,6 @@ function App() {
 
   function handlecategory(event) {
     setcategoryvalue(event.target.innerHTML);
-    console.log("App cat value", categoryvalue)
   }
 
   const handleSearch = useCallback((e) => {
@@ -50,15 +49,13 @@ function App() {
   useEffect(() => {
     const fetch = async () => {
       const items = await localStorage.getItem('user');
-      console.log("app fetch", items)
       if (items) {
         setuserlogged(true)
         const parsed = JSON.parse(items)
-        console.log("setcart", parsed)
         setTimeout(() => {
 
           setloading(false)
-        }, 200);
+        }, 300);
         dispatch(setUser(parsed))
         dispatch(setCart(parsed._id));
       }

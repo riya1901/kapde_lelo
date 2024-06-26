@@ -26,7 +26,6 @@ function OrderItem(order) {
     };
     updateorderItems();
   }, [order]);
-  console.log("order items", orderitems)
  
   return (
     <div className='item-main'>

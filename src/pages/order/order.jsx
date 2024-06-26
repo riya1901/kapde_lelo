@@ -28,7 +28,6 @@ function Order() {
     };
     if (loading)
         fetchData();
-    console.log("order", orderData)
 
 
     return (

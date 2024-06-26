@@ -11,13 +11,10 @@ function Profile({ userlogged }) {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user)
-  console.log("temp", user);
   useEffect(() => {
     if (keeplogged && isuser) {
-      console.log("user saved", user)
       const save = JSON.stringify(user)
       localStorage.setItem('user', save);
-      console.log("json", JSON.parse(save))
     }
 
   }, [keeplogged, isuser]);
@@ -26,7 +23,6 @@ function Profile({ userlogged }) {
 
   useEffect(() => {
     if (user._id != '' || (Object.keys(user).length != 0 && Object.keys(user).length != 14)) {
-      console.log("saved user callled", Object.keys(user).length)
       dispatch(setCart(user._id));
       setTimeout(() => {
         setisuser(true)
@@ -43,7 +39,6 @@ function Profile({ userlogged }) {
     const changecart = async () => {
 
       await dispatch(setCart(user._id));
-      console.log("isuser is changed")
     }
     changecart();
   }, [isuser])

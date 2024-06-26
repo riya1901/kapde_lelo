@@ -22,13 +22,11 @@ let temp = [];
 
 
 const fetchCart = async (id) => {
-  console.log("fetch called", id);
 
   try {
     const response =
       await axios.get(`https://kapde-lelo-server.onrender.com/cart/${id}`);
     data = response.data;
-    console.log("cart reducer", data)
 
   } catch (err) {
     console.log(err.message);
@@ -50,7 +48,6 @@ const update = async (id, data) => {
 
 };
 const remove = async (id) => {
-  console.log("removeIP", id)
   try {
 
     await axios.delete(`https://kapde-lelo-server.onrender.com/cartdel/${id}`);
@@ -68,7 +65,6 @@ const cartReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case 'addtocart':
-      console.log("current cart", state);
       id = action.payload.id;
       existingProduct = newState.find((item) => item.id === id);
 
@@ -102,17 +98,14 @@ const cartReducer = (state = initialState, action) => {
       }
       return newState;
     case 'buyNowcart':
-      console.log("buy now reducer", action.payload)
       index = newState.findIndex(item => item.id === action.payload);
           remove(newState[index]._id);
         newState.splice(index, 1);
       
       return newState;
     case 'clearCart':
-      console.log("clearCart called")
 
       newState.map(async (item) => {
-        console.log("cleared", item._id)
 
         await remove(item._id);
       })
@@ -131,13 +124,11 @@ const cartReducer = (state = initialState, action) => {
 const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case 'setUser':
-      console.log("setUser", action.payload)
       return {
 
         ...action.payload,
       };
     case 'clearUser':
-      console.log("clearUser")
       return {
 
         ...initialUserState,

@@ -12,7 +12,6 @@ function Card({ id,name,price,img}) {
   const Cart=useSelector((state) => state.cart)
   const temp= useSelector((state) => state.user._id)
 const user=temp==""?0:temp;
-console.log("card user",user)
 
 
   useEffect(() => {
@@ -38,7 +37,6 @@ console.log("card user",user)
   const navigate = useNavigate();
 
   function handleaddtocart() {
-console.log("card id",id)
 
     dispatch(addItem(id,user));
 
@@ -48,7 +46,6 @@ console.log("card id",id)
   window.scrollTo(0, 0);
 
   }
-console.log("cart",Cart)
 
   return (
     <div>

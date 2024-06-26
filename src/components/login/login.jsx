@@ -16,7 +16,6 @@ function Login({ setuser, setkeeplogged }) {
     const [userfound, setuserfound] = useState(true);
 
     const temp = useSelector((state) => state.user)
-    console.log("temp", temp)
 
 
 
@@ -27,7 +26,6 @@ function Login({ setuser, setkeeplogged }) {
             ...loginValues,
             [name]: type === 'checkbox' ? checked : value,
         });
-        console.log(loginValues)
     };
     const handlesigninChange = (e) => {
 
@@ -36,14 +34,11 @@ function Login({ setuser, setkeeplogged }) {
             ...signinValues,
             [name]: type === 'checkbox' ? checked : value,
         });
-        console.log(signinValues)
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("calling get user", loginValues)
         await dispatch(getUser(loginValues))
-        console.log("called get user")
         if (Object.keys(temp).length == 0) {
             console.log("user not found")
             setuserfound(false)
@@ -52,22 +47,16 @@ function Login({ setuser, setkeeplogged }) {
             setTimeout(() => {
 
                 if (temp._id == "") {
-                    console.log("user foud not", temp)
                     setuserfound(false)
                 }
-                else {
-                    console.log("user is here")
-                    console.log("user =", temp._id)
-                }
+                
             }, 500);
         }
 
     }
     const handleSignin=async (e)=>{
         e.preventDefault();
-        console.log("calling new user", signinValues)
         await dispatch(newUser(signinValues));
-        console.log("new user registered")
     }
     const handlekeeplogged = async (e) => {
         const checked = e.target.checked;

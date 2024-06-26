@@ -16,14 +16,12 @@ function ProductPage() {
   const Cart = useSelector((state) => state.cart);
   const temp = useSelector((state) => state.user._id)
   const user = temp == "" ? 0 : temp;
-  console.log("product user", user)
 
   useEffect(() => {
     if (product == null)
       isLoading(true)
   })
   const fetchProduct = () => {
-    console.log("product fetch")
 
     axios.get(`https://kapde-lelo-server.onrender.com/product/${id}`)
       .then((response) => {
@@ -43,7 +41,6 @@ function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    console.log("cartadd")
     dispatch(addItem(id, user));
   }
 

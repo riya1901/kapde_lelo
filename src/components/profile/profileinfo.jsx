@@ -14,31 +14,24 @@ function Profileinfo({ user, setisuser }) {
             ...userdata,
             [name]: type === 'checkbox' ? checked : value,
         });
-        console.log(userdata)
     };
     const handlsave = async (e) => {
 
         e.preventDefault();
-        console.log("calling update user",userdata )
         await dispatch(updateUser(userdata._id,userdata))
         const save= JSON.stringify(userdata)
         
       localStorage.setItem('user', save);
 
-        console.log("called update user")
         setisedit(false)
 
     }
     const handleSingnout=async(e)=>{
         e.preventDefault();
-        console.log("clear user called")
 
         await dispatch(clearUser());
-        console.log("user cleared")
         await localStorage.removeItem('user');
-        console.log("local user cleared")
         
-        console.log("card app-user", user)
         await dispatch(setCart(0));
         setTimeout(()=>{
             setisuser(false);
@@ -48,7 +41,6 @@ function Profileinfo({ user, setisuser }) {
 
     }
 
-console.log("userinfo",userdata)
 
     return (
         <>

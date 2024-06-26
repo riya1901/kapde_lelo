@@ -5,12 +5,10 @@ import axios from 'axios';
 import Loader from '../loader/loader.jsx';
 
 function Category({ title, categoryvalue ,search}) {
-  console.log("category called");
 
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log("category cat value",categoryvalue);
  
 
 
@@ -29,7 +27,6 @@ function Category({ title, categoryvalue ,search}) {
       }else {
         const response = 
           await axios.get(`https://kapde-lelo-server.onrender.com/search/${search}`)
-          console.log("search called",search)
         setProductData(response.data);
       }
       } catch (err) {

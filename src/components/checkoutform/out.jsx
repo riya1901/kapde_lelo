@@ -31,9 +31,7 @@ const Out = ({id=0,total}) => {
 
   const nextStep = async() => {   if(step==3){
     if(id!=0){
-      console.log("buy now processed",id)
       const index = Cart.findIndex(item => item.id == id)
-      console.log("buy now index",index)
 
       const temp = [{ item:Cart[index].id, quantity: Cart[index].quantity }]
       const order={
@@ -42,7 +40,6 @@ const Out = ({id=0,total}) => {
         details:formValues,
         total:total
       }
-      console.log("buy now order",order)
 
       dispatch(buyNowcart(id,order))
     }
@@ -61,7 +58,6 @@ const Out = ({id=0,total}) => {
         total:total
 
       }
-      console.log("out order",order)
       await dispatch(newOrder(order))
     }
 
