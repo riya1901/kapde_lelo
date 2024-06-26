@@ -35,7 +35,7 @@ function Profileinfo({ user, setisuser }) {
         await dispatch(setCart(0));
         setTimeout(()=>{
             setisuser(false);
-        },500)
+        },1000)
 
 
 

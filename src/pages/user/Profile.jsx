@@ -26,7 +26,7 @@ function Profile({ userlogged }) {
       dispatch(setCart(user._id));
       setTimeout(() => {
         setisuser(true)
-      }, 200)
+      }, 1000)
     }
 
     // else
