@@ -6,9 +6,7 @@
     flex-direction: column;
     width: 100%;
 
-    .title {
-        font-size: 3rem;
-    }
+    
 }
 
 .profile-main {
@@ -49,6 +47,17 @@
         width: 100vw;
         padding: 0rem;
         margin: 0rem;
+        margin-top: 2px !important;
+
+        .main {
+            height: 100vh;
+            padding-top: 0px;
+            justify-content: center !important;
+            position: relative;
+            top: -50px;
+
+        }
+
 
     }
 
