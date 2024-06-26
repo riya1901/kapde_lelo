@@ -270,6 +270,10 @@ a {
     
 }
 @media only screen and (max-width: 520px) {
+    .group{
+        top:5px;
+        max-width:140px;
+    }
     .logo-name{
         font-size:2rem ;
     }
