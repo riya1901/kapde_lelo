@@ -22,7 +22,7 @@ console.log("cate" ,categoryvalue)
       console.log("s h", document.documentElement.scrollHeight )
       
       if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight +15||window.outerHeight + document.documentElement.scrollTop == document.documentElement.scrollHeight -15) {
-        // setpageup(true)
+        setpageup(true)
       }
     }
     if(pageup){
