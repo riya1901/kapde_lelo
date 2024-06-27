@@ -10,26 +10,32 @@ function Category({ title, categoryvalue, search }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setpage] = useState(0)
+  const [pageup, setpageup] = useState(false)
+
 
 
   useEffect(() => {
     const handleinfiniteScroll = () => {
-      console.log("I h",window.innerHeight )
-      console.log("st",document.documentElement.scrollTop )
-      console.log("s h", document.documentElement.scrollHeight )
+
+      // console.log("I h",window.innerHeight )
+      // console.log("st",document.documentElement.scrollTop )
+      // console.log("s h", document.documentElement.scrollHeight )
       
-      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight + 15) {
-        setpage(page + 1)
-        console.log("page", page)
-
-
+      if ((window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight +15)||(window.innerHeight + document.documentElement.scrollTop == document.documentElement.scrollHeight )) {
+        setpageup(true)
       }
     }
-    window.addEventListener("scroll", handleinfiniteScroll)
+    if(pageup){
+      setpage(page+1)
+      setpageup(false)
+    }
+    window.addEventListener("scroll", handleinfiniteScroll)  
     return () => window.removeEventListener("scroll", () => { console.log("event released") })
 
   })
+
   useEffect(() => {
+  
     console.log("page", page)
 
     const fetchData = async () => {
