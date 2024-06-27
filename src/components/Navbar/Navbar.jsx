@@ -75,7 +75,7 @@ function Navbar({ handlecategory, handlefilter, handleSearch,user }) {
                             <NavLink to='/womens' className={({ isActive }) => `navbar-link${isActive ? "-active" : ""}`} onClick={handlecategory}>Women's clothing</NavLink>
                         </li>
                         <li className="nav-item" onClick={toggleMenu}>
-                            <NavLink to='/kids' className={({ isActive }) => `navbar-link${isActive ? "-active" : ""}`} onClick={handlecategory}>Kids wear</NavLink>
+                            <NavLink to='/Kids' className={({ isActive }) => `navbar-link${isActive ? "-active" : ""}`} onClick={handlecategory}>Jewelery</NavLink>
                         </li>
                     </ul>
                     <div className='search'>

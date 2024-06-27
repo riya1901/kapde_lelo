@@ -12,7 +12,7 @@ function Category({ title, categoryvalue, search }) {
   const [page, setpage] = useState(0)
   const [pageup, setpageup] = useState(false)
 
-
+console.log("cate" ,categoryvalue)
 
   useEffect(() => {
     const handleinfiniteScroll = () => {

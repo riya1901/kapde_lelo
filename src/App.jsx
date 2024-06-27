@@ -90,7 +90,7 @@ function App() {
         <Route path='' element={<Hero categoryvalue={categoryvalue} search={search} />} />
         <Route path='Mens/' element={<Category title="Mens Wear" categoryvalue={categoryvalue} search={search} />} />
         <Route path='womens/' element={<Category title="womens Wear" categoryvalue={categoryvalue} search={search} />} />
-        <Route path='kids/' element={<Category title="kids Wear" categoryvalue={categoryvalue} />} search={search} />
+        <Route path='kids/' element={<Category title="Jewelery" categoryvalue={categoryvalue} search={search}/>}  />
         <Route path='productpage/:id' element={<ProductPage />} />
         <Route path='cart/' element={<Cart />} />
         <Route path='checkout/:id?/:len/:price' element={<Checkout />}>
