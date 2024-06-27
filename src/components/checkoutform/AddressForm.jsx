@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './checkoutform.css';
 
 
 const AddressForm = ({ nextStep, handleChange, values }) => {
+  const[filled,setfilled]=useState(false);
   const continueHandler = (e) => {
     e.preventDefault();
+    
+    if(filled)
     nextStep();
+  else{
+    alert("kindly fill all the fields")
+  }
+
   };
+  useEffect(()=>{
+    if(values.address!=""&&values.email!=""&& values.city!=""&&values.state!=""&&values.pincode!=""&&values.firstName!=""&&values.address2!=""&&values.phone!="")
+      setfilled(true)
+    else
+    setfilled(false)
+  },[values])
 
   return (
     <form>

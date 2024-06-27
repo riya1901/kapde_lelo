@@ -22,16 +22,12 @@ function Profile({ userlogged }) {
 
 
   useEffect(() => {
-    if (user._id != '' || (Object.keys(user).length != 0 && Object.keys(user).length != 14)) {
+    if (user._id != '' && (Object.keys(user).length != 0 && Object.keys(user).length != 14)) {
       dispatch(setCart(user._id));
       setTimeout(() => {
         setisuser(true)
       }, 1000)
     }
-
-    // else
-    // setisuser(false)
-
   });
 
   useEffect(() => {
@@ -48,7 +44,7 @@ function Profile({ userlogged }) {
       <div className="profile-main">
         <div className="main">
 
-          {isuser ? (<Profileinfo user={user} setisuser={setisuser} />) : (<Login setuser={setisuser} setkeeplogged={setkeeplogged} />)}
+          {isuser ? (<Profileinfo user={user} setisuser={setisuser} />) : (<Login setisuser={setisuser} setkeeplogged={setkeeplogged} />)}
 
         </div>
       </div>

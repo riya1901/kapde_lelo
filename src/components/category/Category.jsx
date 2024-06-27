@@ -4,31 +4,52 @@ import './category.css'
 import axios from 'axios';
 import Loader from '../loader/loader.jsx';
 
-function Category({ title, categoryvalue ,search}) {
+function Category({ title, categoryvalue, search }) {
 
   const [productData, setProductData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- 
-
+  const [page, setpage] = useState(0)
 
 
   useEffect(() => {
+    const handleinfiniteScroll = () => {
+      console.log("I h",window.innerHeight )
+      console.log("st",document.documentElement.scrollTop )
+      console.log("s h", document.documentElement.scrollHeight )
+      
+      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight + 15) {
+        setpage(page + 1)
+        console.log("page", page)
+
+
+      }
+    }
+    window.addEventListener("scroll", handleinfiniteScroll)
+    return () => window.removeEventListener("scroll", () => { console.log("event released") })
+
+  })
+  useEffect(() => {
+    console.log("page", page)
+
     const fetchData = async () => {
       setLoading(true);
       setError(null);
-      try {if(search==""){
-        const response = categoryvalue !== ""
-          ? await axios.get(`https://kapde-lelo-server.onrender.com/category/${categoryvalue}`)
-          : await axios.get("https://kapde-lelo-server.onrender.com/items");
 
-        setProductData(response.data);
+      try {
+        if (search == "") {
+          const response = categoryvalue !== ""
+            ? await axios.get(`https://kapde-lelo-server.onrender.com/category/${categoryvalue}`)
+            : await axios.get(`https://kapde-lelo-server.onrender.com/items/${page}`);
+       
+            setProductData([...productData, ...response.data]);
         
-      }else {
-        const response = 
-          await axios.get(`https://kapde-lelo-server.onrender.com/search/${search}`)
-        setProductData(response.data);
-      }
+
+        } else {
+          const response =
+            await axios.get(`https://kapde-lelo-server.onrender.com/search/${search}`)
+          setProductData(response.data);
+        }
       } catch (err) {
         setError(err.message);
       }
@@ -36,31 +57,37 @@ function Category({ title, categoryvalue ,search}) {
     };
 
     fetchData();
-  }, [categoryvalue,search]);
+  }, [categoryvalue, search, page]);
 
-  if (loading) {
 
-    return (<div className='lmain'><Loader /></div> 
-    );
-  }
+if(page==0&&loading)
+  return <loading/>
 
   if (error) {
     return <div className="error">{error}</div>;
   }
 
+  console.log(productData)
+
+
+
   return (
     <>
       <div>
-        <div className='title'><p>{search==""?title:"Search Result"}</p></div>
+        <div className='title'><p>{search == "" ? title : "Search Result"}</p></div>
       </div>
+
       <div className="products">
-        {productData.map((product) => (
-          <Card key={product._id} id={product._id}
-          img={product.image}
-          name={product.title}
-          price={product.price}/>
+
+        {productData.map((product,index) => (
+          <Card key={index} id={product._id}
+            img={product.image}
+            name={product.title}
+            price={product.price} />
         ))}
       </div>
+
+
     </>
   );
 }

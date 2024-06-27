@@ -12,6 +12,7 @@ const ShippingForm = ({ nextStep, prevStep, handleChange, values }) => {
     prevStep();
   };
 
+
   return (
     <form>
       <div className="step-info">

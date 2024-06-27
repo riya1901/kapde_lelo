@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './login.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, newUser } from '../../Store/action';
-function Login({ setuser, setkeeplogged }) {
+function Login({ setisuser, setkeeplogged }) {
     const dispatch = useDispatch();
     const [loginValues, setloginValues] = useState({
         email: "",
@@ -14,11 +14,8 @@ function Login({ setuser, setkeeplogged }) {
         pass: ""
     });
     const [userfound, setuserfound] = useState(true);
-
+    const [filled, setfilled] = useState(true);
     const temp = useSelector((state) => state.user)
-
-
-
     const handleloginChange = (e) => {
 
         const { name, value, type, checked } = e.target;
@@ -38,26 +35,43 @@ function Login({ setuser, setkeeplogged }) {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        await dispatch(getUser(loginValues))
-        if (Object.keys(temp).length == 0) {
-            console.log("user not found")
-            setuserfound(false)
+        if (loginValues.email != "" && loginValues.pass != ""){
+            setfilled(true)
+            await dispatch(getUser(loginValues))
+            if (Object.keys(temp).length == 0) {
+                console.log("user not found")
+                setuserfound(false)
+            }
+            else {
+                setTimeout(() => {
+                    if (temp._id == "") {
+                        setuserfound(false)
+                    }
+                }, 500);
+            }
         }
-        else {
-            setTimeout(() => {
-
-                if (temp._id == "") {
-                    setuserfound(false)
-                }
-                
-                
-            }, 500);
-        }
+        else
+        setfilled(false)
 
     }
-    const handleSignin=async (e)=>{
+    const handleSignin = async (e) => {
         e.preventDefault();
-        await dispatch(newUser(signinValues));
+        if (signinValues.email != "" && signinValues.pass != "") {
+            setfilled(true)
+            await dispatch(newUser(signinValues));
+            if (Object.keys(temp).length == 0) {
+                console.log("user not found")
+                setuserfound(false)
+            } else {
+                setTimeout(() => {
+                    if (temp._id == "") {
+                        setuserfound(false)
+                    }
+                }, 500);
+            }
+        }
+        else
+            setfilled(false)
     }
     const handlekeeplogged = async (e) => {
         const checked = e.target.checked;
@@ -79,7 +93,8 @@ function Login({ setuser, setkeeplogged }) {
 
                                 </div>
                                 <form className="flip-card__form" action="">
-                                    <p className={userfound ? "" : "active"}>user not found: check email and password</p>
+                                    {filled?(<p className={userfound ? "" : "active"}>user not found: check email and password</p>):(<p className= "active">Please fill all the fields</p>)}
+                                    
                                     <input className="flip-card__input" name="email" placeholder="Email" type="email" onChange={handleloginChange} value={loginValues.email} />
                                     <input className="flip-card__input" name="pass" placeholder="Password" type="password" onChange={handleloginChange} value={loginValues.pass} />
                                     <label className='getupdate'>
@@ -99,6 +114,7 @@ function Login({ setuser, setkeeplogged }) {
                             <div className="flip-card__back">
                                 <div className="title">Sign up</div>
                                 <form className="flip-card__form" action="">
+                                    {filled?(<p className={userfound ? "" : "active"}>User already exist please login</p>):(<p className= "active">User already exist , please login</p>)}
                                     <input className="flip-card__input" placeholder="Name" name="firstName" type="firstName" onChange={handlesigninChange} value={signinValues.firstName} />
                                     <input className="flip-card__input" name="email" placeholder="Email" type="email" onChange={handlesigninChange} value={signinValues.email} />
                                     <input className="flip-card__input" name="pass" placeholder="Password" type="password" onChange={handlesigninChange} value={signinValues.pass} />
