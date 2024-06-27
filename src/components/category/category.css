@@ -15,9 +15,45 @@
     flex-wrap: wrap;
     gap: 5rem;
     justify-content: center;
+    .expand {
+        width: 100%;
+        height: 3rem;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+
+
+        .arrow {
+            border: solid var(--subtext);
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+
+            cursor: pointer;
+
+        }
+
+        .down {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .up {
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+    }
 }
 .lmain{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (max-width: 520px){
+    .expand{
+        display: flex;
+
+    }
 }
