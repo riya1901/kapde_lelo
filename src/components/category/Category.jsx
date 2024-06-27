@@ -21,7 +21,7 @@ console.log("cate" ,categoryvalue)
       // console.log("st",document.documentElement.scrollTop )
       // console.log("s h", document.documentElement.scrollHeight )
       
-      if ((window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight +15)||(window.innerHeight + document.documentElement.scrollTop == document.documentElement.scrollHeight )) {
+      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight +15||window.innerHeight + document.documentElement.scrollTop == document.documentElement.scrollHeight ) {
         setpageup(true)
       }
     }
@@ -66,8 +66,10 @@ console.log("cate" ,categoryvalue)
   }, [categoryvalue, search, page]);
 
 
-if(page==0&&loading)
+if(page==0&&loading){
+
   return <loading/>
+}
 
   if (error) {
     return <div className="error">{error}</div>;
