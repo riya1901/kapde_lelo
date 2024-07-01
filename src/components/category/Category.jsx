@@ -17,9 +17,9 @@ console.log("cate" ,categoryvalue)
   useEffect(() => {
     const handleinfiniteScroll = () => {
 
-      console.log("I h",window.innerHeight )
-      console.log("st",document.documentElement.scrollTop )
-      console.log("s h", document.documentElement.scrollHeight )
+      // console.log("I h",window.innerHeight )
+      // console.log("st",document.documentElement.scrollTop )
+      // console.log("s h", document.documentElement.scrollHeight )
       
       if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.scrollHeight +15||window.innerHeight + document.documentElement.scrollTop == document.documentElement.scrollHeight) {
         setpageup(true)
@@ -33,6 +33,8 @@ console.log("cate" ,categoryvalue)
     return () => window.removeEventListener("scroll", () => { console.log("event released") })
 
   })
+ 
+
 
   useEffect(() => {
   
@@ -41,16 +43,16 @@ console.log("cate" ,categoryvalue)
     const fetchData = async () => {
       setLoading(true);
       setError(null);
+      
 
       try {
         if (search == "") {
           const response = categoryvalue !== ""
             ? await axios.get(`https://kapde-lelo-server.onrender.com/category/${categoryvalue}`)
             : await axios.get(`https://kapde-lelo-server.onrender.com/items/${page}`);
+            await setProductData([...productData, ...response.data]);
+      
        
-            setProductData([...productData, ...response.data]);
-        
-
         } else {
           const response =
             await axios.get(`https://kapde-lelo-server.onrender.com/search/${search}`)
@@ -68,7 +70,9 @@ console.log("cate" ,categoryvalue)
 
 if(page==0&&loading){
 
-  return <loading/>
+  return <div className='lmain'>
+    <Loader/>
+    </div>
 }
 
   if (error) {

@@ -51,6 +51,7 @@
     justify-content: center;
 }
 
+
 @media only screen and (max-width: 520px){
     .expand{
         display: flex !important;
